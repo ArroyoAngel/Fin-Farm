@@ -1,20 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useFonts } from 'expo-font';
+import { extendTheme, Text } from 'native-base';
+import { NativeBaseProvider } from 'native-base';
+import customFont from './src/assets/fonts';
+import customTheme from './src/assets/theme'
+import AppHandler from './AppHandler'
 
 export default function App() {
+  const [fontsLoaded] = useFonts(customFont)
+  if(!fontsLoaded) return undefined
+  const theme = extendTheme(customTheme)
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NativeBaseProvider theme={theme} >
+        <AppHandler />
+    </NativeBaseProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
